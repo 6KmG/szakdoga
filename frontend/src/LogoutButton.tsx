@@ -2,7 +2,7 @@ import React from "react";
 
 const LogoutButton: React.FC = () => {
   const handleLogout = async () => {
-    await fetch("/logout", {
+    await fetch("http://localhost:8080/logout", {
       method: "POST",
       credentials: "include",
     });
