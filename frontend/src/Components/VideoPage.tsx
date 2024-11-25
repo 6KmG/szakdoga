@@ -5,8 +5,8 @@ import VideoStream from "./Videostream/VideoStream";
 import AuthService from "../Services/AuthService";
 import { useParams } from "react-router-dom";
 
-const Home: React.FC = () => {
-  const {videoPath} = useParams<{ videoPath: string }>();
+const VideoPage: React.FC = () => {
+  const {videoName} = useParams();
 
   const [authStatus, setAuthStatus] = useState(false);
 
@@ -23,8 +23,8 @@ const Home: React.FC = () => {
     checkAuthStatus();
   }, []);
   
-  console.log(window.location.pathname);
-  console.log(authStatus);
+  // console.log(authStatus);
+  console.log(videoName);
 
   return (
     <div className="Home">
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
       </header>
       
       <section className="left-edge top-[10%] sm:w-[70%]">
-        <VideoStream videoUrl={`http://localhost:8080/video/mp4/rlmoments3`} />
+        <VideoStream videoUrl={`http://localhost:8080/video/mp4/${videoName}`} />
         <h2 className="text-2xl font-bold py-[2%] px-[3%]">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, neque.
         </h2>
@@ -49,4 +49,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default VideoPage;

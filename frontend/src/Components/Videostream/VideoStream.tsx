@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 interface Component {
-    className?: string;
+    // className?: string;
     videoUrl: string;
 }
 
@@ -30,8 +30,8 @@ const VideoStream: React.FC<Component> = ( {videoUrl}) => {
 
 
   return (
-    <video width="1280" height="720" controls>
-        <source src={videoUrl} type="video/mp4" />
+    <video controls className="max-h-[75vh]">
+        <source src={videoUrl} type="video/mp4"/>
     </video>
   )
 }
