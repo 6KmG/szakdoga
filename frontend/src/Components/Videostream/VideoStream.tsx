@@ -4,13 +4,10 @@ import React, { useState, useEffect } from "react";
 
 interface Component {
     className?: string;
+    videoUrl: string;
 }
 
-const VideoStream: React.FC<Component> = ( {className}) => {
-    const videoUrl = "http://localhost:8080/video/mp4/rlmoments3";
-
-    const baseStyles = "";
-
+const VideoStream: React.FC<Component> = ( {videoUrl}) => {
     const fetchVideo = async () => {
         try {
             const response = await fetch(videoUrl, {
@@ -33,7 +30,7 @@ const VideoStream: React.FC<Component> = ( {className}) => {
 
 
   return (
-    <video width="1280" height="720" controls className={`${baseStyles} ${className}`}>
+    <video width="1280" height="720" controls>
         <source src={videoUrl} type="video/mp4" />
     </video>
   )

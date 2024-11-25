@@ -13,10 +13,13 @@ interface AuthResponse {
   email: string;
   accessToken: string;
   roles?: string[];
+  // // data: {
+  //   message: string;
+  // };
 }
 
 const register = (username: string, email: string, password: string): Promise<AxiosResponse<AuthResponse>> => {
-  return axios.post<AuthResponse>(`${API_URL}`, {
+  return axios.post<AuthResponse>(`${API_URL}/req/signup`, {
     username,
     email,
     password,
@@ -65,6 +68,18 @@ const logout = (): Promise<AuthResponse> => {
     ).then((response) => response.data);
 };
 
+async function checkAuthStatus(): Promise<boolean> {
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/status", {
+      credentials: "include", // Include cookies for session management
+    });
+    return response.redirected;
+  } catch (error) {
+    console.error("Error checking auth status:", error);
+    return false; // Assume not authenticated if there's an error
+  }
+}
+
 const getCurrentUser = (): AuthResponse | null => {
   const user = localStorage.getItem("user");
   return user ? JSON.parse(user) : null;
@@ -75,6 +90,7 @@ const AuthService = {
   login,
   logout,
   getCurrentUser,
+  checkAuthStatus,
 };
 
 export default AuthService;
