@@ -10,7 +10,7 @@
 </head>
 <body>
   <section>
-    <form action="/req/signup" method="post">
+    <form id="signupForm" onsubmit="return false;">
       <h1>Sign Up</h1>
         <div class="inputbox">
             <ion-icon name="person-outline"></ion-icon>
@@ -42,8 +42,8 @@
 </body>
 </html>
 <script>
-  const submitButttom = document.getElementById("submit");
-  submitButttom.addEventListener('click',()=>{
+  document.getElementById('signupForm').addEventListener('submit', (e) => {
+    e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('passwordcon').value;
@@ -63,7 +63,12 @@
         },
         body: jsonData
       })
-      .then(response =>{
+      .then(response => {
+        if (response.ok) {
+          window.location.href = '/req/login';
+        } else {
+          response.text().then(error => alert(error));
+        }
         //alert('succesfull');
         //if(response.status == 200){
           //alert('succesfull');

@@ -12,14 +12,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.HttpMethod;
 
-import com.example.demo.Model.MyAppUserService;
+import com.example.demo.Service.MyAppUserService;
 
 import lombok.AllArgsConstructor;
 
 @Configuration
-@AllArgsConstructor
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig {
     
     @Autowired
@@ -56,10 +57,12 @@ public class SecurityConfig {
     
             
             .authorizeHttpRequests(registry ->{
-                registry.requestMatchers("/req/signup","/css/**","/js/**").permitAll();
+                registry.requestMatchers("/api/v1/videos/**","/req/signup","/css/**","/js/**").permitAll();
                 registry.anyRequest().authenticated();
             })
             .build();
     }
     
+
 }
+
